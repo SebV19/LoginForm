@@ -9,29 +9,6 @@ using namespace std;
 
 int answer = 0;
 
-void menu(){
-    switch (answer)
-    {
-    case 1: 
-        login();
-        break;
-        
-    case 2:
-        signUp();
-        break;
-
-    case 3:
-        cout<< "Good bye! \n";
-        answer = 3;
-        break;
-
-    default:
-        cout << "Please use 1,2 or 3!";
-        break;
-    } 
-
-}
-
 
 void signUp(){
 
@@ -51,9 +28,10 @@ void signUp(){
 
     cout << "Registration Complete \n \n";
 
-    menu();
 
 }
+
+
 
 void ask2signUp(){
 
@@ -79,6 +57,11 @@ void ask2signUp(){
 
 }
 
+
+void displayUser_Page(string username){
+    cout << "Aici afisezi";
+    cout << username;
+}
 
 int login(){
 
@@ -107,7 +90,8 @@ int login(){
         }
         if(username.compare(row[0]) == 0 && psswd.compare(row[1]) == 0){
             count = 1;
-            cout << "You are in \n";
+            username = row[0];
+            displayUser_Page(username);
             break;
         }
 
@@ -122,8 +106,29 @@ int login(){
     return 0;
 }
 
-void displayUser_Page(){
-    cout << "Aici afisezi";
+
+
+void menu(){
+    switch (answer)
+    {
+    case 1: 
+        login();
+        break;
+        
+    case 2:
+        signUp();
+        break;
+
+    case 3:
+        cout<< "Good bye! \n";
+        answer = 3;
+        break;
+
+    default:
+        cout << "Please use 1,2 or 3!";
+        break;
+    } 
+
 }
 
 

@@ -94,7 +94,7 @@ vector <string> checkUser(string file_name, string search_username){
 
             }
 
-            return word_user;
+            return row;
          }
 
 
@@ -105,9 +105,8 @@ int login(){
     cout << "Enter your username: "; cin >> username; 
     cout << "Enter your password: "; cin >> psswd;
 
-    string data = checkUser("users_list.csv", username);
-    cout << data;
-    
+    vector <string> data = checkUser("users_list.csv", username);
+
     
 
     // if(found_user == false){

@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
+#include <iterator>
 
 
 using namespace std;
@@ -58,54 +60,67 @@ void ask2signUp(){
 }
 
 
-void displayUser_Page(string username){
-    cout << "Aici afisezi";
-    cout << username;
+void displayUser_Page(string username, string age, string height){
+
+    cout << username << ", " << age << ", " << height;
 }
+
+vector <string> checkUser(string file_name, string search_username){
+
+  
+    vector <string> row;
+
+    fstream file;
+    file.open("users_list.csv", ios::in);
+
+    bool found_user = false;
+    string line, word_user, word_psswd, word_age, word_height;
+    
+
+    while(getline (file, word_user, ',') && !found_user){
+
+            getline (file, word_psswd, ',');
+            getline (file, word_age, ',');
+            getline (file, word_height, '\n');
+
+                 if(word_user == search_username)
+                {        
+                    found_user = true;
+                    row.push_back(word_user);
+                    row.push_back(word_psswd);
+                    row.push_back(word_age);
+                    row.push_back(word_height);
+                }
+
+            }
+
+            return word_user;
+         }
+
 
 int login(){
 
-    fstream file;
-
-    file.open("users_list.csv", ios::in);
-    string username;
-    string psswd;
-    int count = 0;
+    string username, psswd;
 
     cout << "Enter your username: "; cin >> username; 
     cout << "Enter your password: "; cin >> psswd;
 
-    vector<string> row;
-    string line, word, temp;
-
-    while(!file.eof()){
-
-        row.clear();
-        getline(file, line);
-        stringstream s(line);
+    string data = checkUser("users_list.csv", username);
+    cout << data;
     
-        while(getline (s, word, ',' ) ){
-            row.push_back(word);
-
-        }
-        if(username.compare(row[0]) == 0 && psswd.compare(row[1]) == 0){
-            count = 1;
-            username = row[0];
-            displayUser_Page(username);
-            break;
-        }
-
-        }
-
-        if(count == 0){
-            cout << "There is no user with this username and password \n";
-            ask2signUp();
-        }
-
     
+
+    // if(found_user == false){
+            
+    //     cout << "There is no user with this username and password \n";
+    //     ask2signUp();
+    //     }
+
+    // displayUser_Page(username, age, height);
+
+            
     return 0;
 }
-
 
 
 void menu(){

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <vector>
 #include <sstream>
 #include <algorithm>
@@ -100,20 +100,24 @@ vector <string> checkUser(string file_name, string search_username){
 
 int login(){
 
-    string username, psswd;
+    string username, psswd, psswd2check;
 
     cout << "Enter your username: "; cin >> username; 
     cout << "Enter your password: "; cin >> psswd;
 
     vector <string> data = checkUser("users_list.csv", username);
 
+    for(int i = 0; i < data.size(); i++)
+        psswd2check = data[1];
     
-
-    // if(found_user == false){
-            
-    //     cout << "There is no user with this username and password \n";
-    //     ask2signUp();
-    //     }
+     if(strcmp(psswd2check, psswd) == 0)
+            cout << "you are in";
+        else
+        {
+        cout << "There is no user with this username and password \n";
+        ask2signUp();
+        }
+        
 
     // displayUser_Page(username, age, height);
 

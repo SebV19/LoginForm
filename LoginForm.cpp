@@ -60,11 +60,6 @@ void ask2signUp(){
 }
 
 
-void displayUser_Page(string username, string age, string height){
-
-    cout << username << ", " << age << ", " << height;
-}
-
 vector <string> checkUser(string file_name, string search_username){
 
   
@@ -98,6 +93,17 @@ vector <string> checkUser(string file_name, string search_username){
          }
 
 
+void displayUser_Page(string username, string age, string height){
+
+    cout << username << ", " << age << ", " << height << endl;
+    cout << "Hello, " << username << endl
+    << "Judging by the fact that you are " << age 
+    << "years old ";
+
+    
+}
+
+
 int login(){
 
     string username, psswd, psswd2check;
@@ -106,16 +112,17 @@ int login(){
     cout << "Enter your password: "; cin >> psswd;
 
     vector <string> data = checkUser("users_list.csv", username);
+    unsigned int dataSize = data.size();
 
-    for(int i = 0; i < data.size(); i++)
+    for(int i = 0; i < dataSize; i++)
         psswd2check = data[1];
     
-     if(strcmp(psswd2check, psswd) == 0)
-            cout << "you are in";
+     if(psswd2check == psswd)
+            displayUser_Page(data[0], data[2], data[3]);
         else
         {
         cout << "There is no user with this username and password \n";
-        ask2signUp();
+        ask2signUp(); 
         }
         
 
@@ -158,12 +165,19 @@ int main() {
 
     cout << "Hello, User! Choose an option from below!" << endl << "1. Login" << endl<< "2. Sign Up" << endl << "3. Exit" << endl;
     cout << "Your answer : "; cin >> answer; cout << endl;
-  
-        menu();    
+    cin.get();
+
+    if(answer == 1 || answer == 2 || answer == 3)
+            menu(); 
+        else{
+            cout<< "Use only 1, 2 or 3. \n";
+            menu();
+        }   
 
     } while (answer != 3);
     
     return 0;
 
 }
+
 

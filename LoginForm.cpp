@@ -5,60 +5,16 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <chrono>
+#include <thread>
+#include <stdio.h>
+
 
 
 using namespace std;
+using namespace std::literals::chrono_literals;
 
 int answer = 0;
-
-
-void signUp(){
-
-    ofstream UserList("users_list.csv", ios_base::app);
-    char username[20]; 
-    char psswd[20];
-    int age;
-    char height[20];
-
-    cout << "Enter Your Username: \n "; cin >> username;
-    cout << "Enter your Password: \n"; cin >> psswd;
-    cout << "Enter your age: \n"; cin >> age;
-    cout << "Enter you height: \n"; cin >> height;
-    
-    UserList << username << ", " << psswd << ", " << age << ", " << height << ". \n";
-    UserList.close();
-
-    cout << "Registration Complete \n \n";
-
-
-}
-
-
-
-void ask2signUp(){
-
-        cout << "Do you want to make an account? Y/N \n";
-        char ans;
-        cout << "Your answer: "; cin >> ans;
-
-        if(ans == 'y')
-            signUp();
-
-        if(ans == 'n'){
-            cout << "Thank You/n ";
-            exit(EXIT_SUCCESS);
-
-        }
-
-        if(ans != 'y' || ans != 'n'){
-            cout << "Use only characters 'y for YES and 'n' for NO. \n \n";
-            ask2signUp();        
-        }
-
-
-
-}
-
 
 vector <string> checkUser(string file_name, string search_username){
 
@@ -95,13 +51,94 @@ vector <string> checkUser(string file_name, string search_username){
 
 void displayUser_Page(string username, string age, string height){
 
-    cout << username << ", " << age << ", " << height << endl;
-    cout << "Hello, " << username << endl
+    system("clear");
+    cout << "\n Hello, " << username << endl
     << "Judging by the fact that you are " << age 
-    << "years old ";
+    << " years old and your height is " << height << endl;
+
+    cout << '-' << std::flush;
+
+    for (int i=0; i<1; i++) {
+
+        this_thread::sleep_for(1s);
+        cout << "\b\\" << std::flush;
+        this_thread::sleep_for(1s);
+        cout << "\b|" << std::flush;
+        this_thread::sleep_for(1s);
+        cout << "\b/" << std::flush;
+        this_thread::sleep_for(1s);
+        cout << "\b-" << std::flush;
+        cout << "\b \n Your next lucky day will be in " << rand() %20 << " days. \n";
+
+
+    }
+
+    cout << "Press any key to exit \n"; cin.get();
+    exit(EXIT_SUCCESS);
+
 
     
 }
+
+void signUp(){
+
+    ofstream UserList("users_list.csv", ios_base::app);
+    string username, psswd, age, height, user2check; 
+
+    cout << "Enter Your desired Username: \n "; cin >> username;
+
+    checkUser("users_list.csv", username);
+    vector <string> data = checkUser("users_list.csv", username);
+    unsigned int dataSize = data.size();
+
+    for(int i = 0; i < dataSize; i++)
+        user2check = data[0];
+    
+     if(user2check != username){
+                cout << "Enter your Password: \n"; cin >> psswd;
+                cout << "Enter your age: \n"; cin >> age;
+                cout << "Enter you height: \n"; cin >> height;
+    
+                UserList << username << ", " << psswd << ", " << age << ", " << height << ". \n";
+                UserList.close();
+                cout << "Registration Complete \n \n";
+     }
+
+        else
+        {
+        cout << "This username is already taken, try again!";
+        signUp(); 
+        }
+
+}
+
+
+
+void ask2signUp(){
+
+        cout << "Do you want to make an account? Y/N \n";
+        char ans;
+        cout << "Your answer: "; cin >> ans;
+
+        if(ans == 'y')
+            signUp();
+
+        if(ans == 'n'){
+            cout << "Thank You/n ";
+            exit(EXIT_SUCCESS);
+
+        }
+
+        if(ans != 'y' || ans != 'n'){
+            cout << "Use only characters 'y for YES and 'n' for NO. \n \n";
+            ask2signUp();        
+        }
+
+
+
+}
+
+
 
 
 int login(){
@@ -126,7 +163,6 @@ int login(){
         }
         
 
-    // displayUser_Page(username, age, height);
 
             
     return 0;

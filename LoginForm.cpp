@@ -73,7 +73,8 @@ void displayUser_Page(string username, string age, string height){
 
     }
 
-    cout << "Press any key to exit \n"; cin.get();
+    char random;
+    cout << "Press any key + enter to exit \n"; cin >> random;
     exit(EXIT_SUCCESS);
 
 
@@ -99,14 +100,15 @@ void signUp(){
                 cout << "Enter your age: \n"; cin >> age;
                 cout << "Enter you height: \n"; cin >> height;
     
-                UserList << username << ", " << psswd << ", " << age << ", " << height << ". \n";
+                UserList << username << "," << psswd << "," << age << "," << height << ". \n";
                 UserList.close();
                 cout << "Registration Complete \n \n";
      }
 
         else
         {
-        cout << "This username is already taken, try again!";
+        system("clear");
+        cout << "This username ( " << username << " ) is already taken, try again! \n";
         signUp(); 
         }
 
@@ -124,7 +126,7 @@ void ask2signUp(){
             signUp();
 
         if(ans == 'n'){
-            cout << "Thank You/n ";
+            cout << "Thank You\n ";
             exit(EXIT_SUCCESS);
 
         }

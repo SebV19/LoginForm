@@ -15,6 +15,7 @@ using namespace std;
 using namespace std::literals::chrono_literals;
 
 int answer = 0;
+int login();
 
 vector <string> checkUser(string file_name, string search_username){
 
@@ -103,6 +104,23 @@ void signUp(){
                 UserList << username << "," << psswd << "," << age << "," << height << ". \n";
                 UserList.close();
                 cout << "Registration Complete \n \n";
+                char loginnow;
+                cout << "Do you want to login now? (y/n)"; cin >> loginnow;
+                        if(loginnow == 'y')
+                            login();
+
+                        if(loginnow == 'n'){
+                            cout << "Thank You\n ";
+                            exit(EXIT_SUCCESS);
+
+                        }
+
+                        if(loginnow != 'y' || loginnow != 'n'){
+                            cout << "Use only characters 'y for YES and 'n' for NO. \n \n";
+                            signUp();        
+                        }
+
+
      }
 
         else

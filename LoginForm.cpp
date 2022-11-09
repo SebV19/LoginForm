@@ -189,7 +189,9 @@ int login(){
 }
 
 
-void menu(){
+void menu(int answer){
+    do{
+
     switch (answer)
     {
     case 1: 
@@ -209,6 +211,7 @@ void menu(){
         cout << "Please use 1,2 or 3!";
         break;
     } 
+    }while(answer != 3);
 
 }
 
@@ -216,22 +219,15 @@ void menu(){
 
 int main() {
 
-
-   do{
-
+    int answer;
     cout << "Hello, User! Choose an option from below!" << endl << "1. Login" << endl<< "2. Sign Up" << endl << "3. Exit" << endl;
     cout << "Your answer : "; cin >> answer; cout << endl;
-    cin.get();
-
     if(answer == 1 || answer == 2 || answer == 3)
-            menu(); 
-        else{
-            cout<< "Use only 1, 2 or 3. \n";
-            menu();
-        }   
-
-    } while (answer != 3);
-    
+        menu(answer);
+    else{
+        system("clear");
+        cout<<"Use only specified values! \n";
+        }
     return 0;
 
 }

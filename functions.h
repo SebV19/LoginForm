@@ -15,7 +15,9 @@
 using namespace std;
 using namespace std::literals::chrono_literals;
 
-
+void userGreeting();
+int getAnswer();
+void validateAnswer();
 void ask2signUp();
 void signUp();
 void displayUser_Page(string username, string age, string height);

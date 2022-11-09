@@ -2,6 +2,17 @@
 
 int login();
 
+
+
+void userGreeting(){ 
+
+    cout << "Hello, User! Choose an option from below!" << endl << "1. Login" << endl<< "2. Sign Up" << endl << "3. Exit" << endl;
+    cout << "Your answer : "; 
+
+}
+
+
+
 vector <string> checkUser(string file_name, string search_username){
 
   
@@ -187,5 +198,34 @@ do{
         break;
     } 
     }while(answer != 3);
+
+}
+
+int getAnswer(){
+
+    int answer;
+    cin >> answer; cout << endl;
+
+    return answer;
+
+}
+
+void validateAnswer(){
+
+    bool answerOK = false;
+    
+    int answer = getAnswer();
+
+
+    while(!(answer == 1 || answer == 2 || answer == 3)){
+
+            int newAnswer;
+            cout << "Use only 1, 2 or 3!";
+            cout << "Your answer: "; cin >> newAnswer;
+            answer = newAnswer; 
+            
+        }
+
+    menu(answer);
 
 }

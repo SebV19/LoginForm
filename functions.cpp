@@ -203,10 +203,15 @@ do{
 
 int getAnswer(){
 
-    int answer;
+    char answer[50];
     cin >> answer; cout << endl;
+    int answer_num = atoi(answer);
 
-    return answer;
+    if (answer_num <= 0 || answer_num > 3) {
+        return -1;
+    }
+
+    return answer_num;
 
 }
 
@@ -219,10 +224,9 @@ void validateAnswer(){
 
     while(!(answer == 1 || answer == 2 || answer == 3)){
 
-            int newAnswer;
             cout << "Use only 1, 2 or 3!";
-            cout << "Your answer: "; cin >> newAnswer;
-            answer = newAnswer; 
+            cout << "Your answer: ";
+            answer = getAnswer();
             
         }
 
